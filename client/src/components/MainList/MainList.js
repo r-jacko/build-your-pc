@@ -9,10 +9,12 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import Row from "./Row/Row";
+import ShareModal from "./ShareModal/ShareModal";
 
-const MainList = ({setCurrentId, elements}) => {
+const MainList = ({ setCurrentId, elements }) => {
+  const [mode, setMode] = useState(false);
   if (!elements) return "Start creating your setup by adding a new element";
 
   return (
@@ -23,7 +25,7 @@ const MainList = ({setCurrentId, elements}) => {
             <TableHead>
               <TableRow>
                 <TableCell />
-                <TableCell/>
+                <TableCell />
                 <TableCell>Name</TableCell>
                 <TableCell align="right">Model</TableCell>
                 <TableCell align="right">Category</TableCell>
@@ -33,20 +35,32 @@ const MainList = ({setCurrentId, elements}) => {
             </TableHead>
             <TableBody>
               {elements.map((row) => (
-                <Row key={row._id} row={row} setCurrentId={setCurrentId}/>
+                <Row
+                  key={row._id}
+                  row={row}
+                  setCurrentId={setCurrentId}
+                  mode={mode}
+                />
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Button variant="outlined">EDIT</Button>
+        <Button
+          variant="outlined"
+          onClick={() => setMode((prevState) => !prevState)}
+        >
+          {mode ? `CANCEL` : `EDIT`}
+        </Button>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Button variant="outlined">EXPORT/PRINT</Button>
+        <Button variant="outlined" disabled={mode}>
+          EXPORT/PRINT
+        </Button>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Button variant="outlined">SHARE</Button>
+        <ShareModal mode={mode} />
       </Grid>
     </Grid>
   );
