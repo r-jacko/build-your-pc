@@ -12,6 +12,7 @@ import {
 import React, { useState } from "react";
 import Row from "./Row/Row";
 import ShareModal from "./ShareModal/ShareModal";
+import ExportPrintModal from "./ExportPrintModal/ExportPrintModal";
 
 const MainList = ({ setCurrentId, elements }) => {
   const [mode, setMode] = useState(false);
@@ -55,9 +56,7 @@ const MainList = ({ setCurrentId, elements }) => {
         </Button>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Button variant="outlined" disabled={mode}>
-          EXPORT/PRINT
-        </Button>
+      <ExportPrintModal mode={mode}/>
       </Grid>
       <Grid item xs={12} md={4}>
         <ShareModal mode={mode} />
