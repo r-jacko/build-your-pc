@@ -1,16 +1,9 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
 import React, { useEffect } from 'react';
-// import {useSelector} from "react-redux"
-import {useDispatch} from 'react-redux'
-import { getList } from '../../actions/list';
 import Row from './Row/Row';
+import { getList } from '../../api';
 
 const MainList = () => {
-  // const {elements} = useSelector((state)=> state.elements);
-  const dispatch = useDispatch();
-  useEffect(()=>{
-    dispatch(getList);
-  },[])
    const elements = [
   {
     "_id": "1",
@@ -73,7 +66,17 @@ const MainList = () => {
     "creator": "jacko"
   }
 ];
-  console.log(elements);
+const loadData = async ()=>{
+  try {
+    const data = await getList();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+  useEffect(()=>{
+    loadData();
+  },[])
   if(!elements) return 'Start creating your setup by adding a new element';
 
 
