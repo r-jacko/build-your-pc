@@ -9,19 +9,20 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Row from "./Row/Row";
 import ShareModal from "./ShareModal/ShareModal";
 import ExportPrintModal from "./ExportPrintModal/ExportPrintModal";
 
 const MainList = ({ setCurrentId, elements }) => {
   const [mode, setMode] = useState(false);
+  const componentRef = useRef();
   if (!elements) return "Start creating your setup by adding a new element";
 
   return (
     <Grid container>
       <Grid item xs={12}>
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} ref={componentRef}>
           <Table aria-label="collapsible table">
             <TableHead>
               <TableRow>
@@ -56,7 +57,7 @@ const MainList = ({ setCurrentId, elements }) => {
         </Button>
       </Grid>
       <Grid item xs={12} md={4}>
-      <ExportPrintModal mode={mode}/>
+      <ExportPrintModal mode={mode} componentRef={componentRef}/>
       </Grid>
       <Grid item xs={12} md={4}>
         <ShareModal mode={mode} />

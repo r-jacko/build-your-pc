@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Box, Button, Typography, Modal } from '@mui/material';
+import ReactToPrint from 'react-to-print'
 
 const testStyle = {
   position: 'absolute',
@@ -13,7 +14,7 @@ const testStyle = {
   p: 4,
 };
 
-const ExportPrintModal = ({mode}) => {
+const ExportPrintModal = ({mode, componentRef}) => {
   const [openModal, setOpenModal] = useState(false)
   const handleCloseModal = ()=> setOpenModal(false)
   const handleOpenModal = ()=> setOpenModal(true)
@@ -23,7 +24,12 @@ const ExportPrintModal = ({mode}) => {
     <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title">
       <Box sx={testStyle}>
       <Typography id="modal-modal-title" variant='h6' component="h2">Choose an option</Typography>
-      <Button>PRINT</Button>
+      <ReactToPrint
+      trigger={()=>(
+        <Button variant='outlined'>PRINT</Button>
+      )}
+      content={()=>componentRef.current}
+      />
       <Button>DOWNLOAD PDF</Button>
       </Box>
     </Modal>
