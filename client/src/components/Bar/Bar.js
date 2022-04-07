@@ -1,12 +1,17 @@
 import React from "react";
-import logo from '../../images/logo.png'
+import logo from "../../images/logo.png";
+import { Grid, Typography } from "@mui/material";
 
 const Bar = () => {
   return (
-    <>
-      <h1>Build Your </h1>
-      <img src={logo} alt="Build Your PC" height="40"/>
-    </>
+    <Grid container>
+      <Grid item xs={12} sm={6} textAlign="end">
+        <Typography variant="h2">BUILD YOUR</Typography>
+      </Grid>
+      <Grid item xs={12} sm={6}>
+        <img src={logo} alt="Build Your PC" height="60" />
+      </Grid>
+    </Grid>
   );
 };
 

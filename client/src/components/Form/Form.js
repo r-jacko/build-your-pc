@@ -1,22 +1,25 @@
 import React, {useState} from 'react';
-import {Button,  Paper, TextField,  Typography, Grid } from '@mui/material';
+import {Button,  Paper, Typography, Grid } from '@mui/material';
 import SelectElement from './SelectElement/SelectElement';
 import Input from './Input/Input';
 
+const initialState={elementName: "",
+category:"",
+elementModel:"",
+description:"",
+quantity: "",
+price: ""}
+
 const Form = () => {
-  const [elementData, setElementData] = useState({
-    elementName: "",
-    category:"",
-    elementModel:"",
-    description:"",
-    quantity: "",
-    price: ""
-  });
+  const [elementData, setElementData] = useState(initialState);
   const handleChange = (e)=>{
     setElementData({...elementData, [e.target.name]: e.target.value})
   }
   const handleClick = ()=>{
     console.log(elementData)
+  }
+  const handleClear = ()=>{
+    setElementData(initialState)
   }
   return ( 
     <Paper elevation={6}>
@@ -32,7 +35,7 @@ const Form = () => {
       <Button variant='contained' color='primary' onClick={handleClick}>ADD</Button>
       </Grid>
       <Grid item xs={6}>
-      <Button variant='outlined' color='secondary'>Clear</Button>
+      <Button variant='outlined' color='secondary' onClick={handleClear}>Clear</Button>
       </Grid>
       </Grid>
     </Paper>
