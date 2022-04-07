@@ -36,6 +36,9 @@ const Form = ({ currentId, setCurrentId, elements }) => {
   useEffect(() => {
     if (editedElement) setElementData(editedElement);
   }, [editedElement]);
+  useEffect(()=>{
+    if (!currentId) handleClear()
+  },[currentId])
   return (
     <Paper elevation={6}>
       <Typography variant="h5" textAlign="center">

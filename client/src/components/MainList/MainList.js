@@ -51,7 +51,10 @@ const MainList = ({ setCurrentId, elements }) => {
       <Grid item xs={12} md={4}>
         <Button
           variant="outlined"
-          onClick={() => setMode((prevState) => !prevState)}
+          onClick={() => {
+            setCurrentId(null)
+            setMode((prevState) => !prevState)
+          }}
         >
           {mode ? `CANCEL` : `EDIT`}
         </Button>
