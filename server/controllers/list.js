@@ -26,11 +26,18 @@ export const createElement = async (req,res)=>{
 export const updateElement = async (req,res)=>{
   const {id: _id} = req.params;
   const element = req.body;
-  if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No post with that id");
+  if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("No element with that id");
   const updatedElement = await Element.findByIdAndUpdate(
     _id,
     {...element, _id},
     {new:true}
   );
   res.status(200).json(updatedElement);
+}
+
+export const deleteElement = async (req,res)=>{
+  const {id} = req.params;
+  if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No element with that id");
+  await Element.findByIdAndDelete(id);
+  res.status(200).json({Message: "Element deleted successfully"})
 }

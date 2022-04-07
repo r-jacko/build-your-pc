@@ -11,9 +11,11 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
+import { deleteElement } from "../../../api";
 
-const Row = ({ row, setCurrentId }) => {
+const Row = ({ row, setCurrentId, mode }) => {
   const [open, setOpen] = useState(false);
+  console.log(mode);
   return (
     <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -27,10 +29,10 @@ const Row = ({ row, setCurrentId }) => {
           </IconButton>
         </TableCell>
         <TableCell>
-          <IconButton onClick={()=>setCurrentId(row._id)}>
+          <IconButton onClick={() => setCurrentId(row._id)} disabled={!mode}>
             <Edit />
           </IconButton>
-          <IconButton>
+          <IconButton onClick={() => deleteElement(row._id)} disabled={!mode}>
             <Clear />
           </IconButton>
         </TableCell>
