@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Paper, Typography, Grid } from "@mui/material";
 import SelectElement from "./SelectElement/SelectElement";
 import Input from "./Input/Input";
-import { createElement, updateElement } from "../../api";
+import { createElement ,updateElement } from "../../api";
 
 const initialState = {
   elementName: "",
@@ -13,7 +13,7 @@ const initialState = {
   price: "",
 };
 
-const Form = ({ currentId, setCurrentId, elements }) => {
+const Form = ({ currentId, setCurrentId, elements, setIsLoading }) => {
   const [elementData, setElementData] = useState(initialState);
   const editedElement = currentId
     ? elements.find((element) => element._id === currentId)
@@ -21,11 +21,12 @@ const Form = ({ currentId, setCurrentId, elements }) => {
   const handleChange = (e) => {
     setElementData({ ...elementData, [e.target.name]: e.target.value });
   };
-  const handleClick = () => {
+  const handleClick = async () => {
+    setIsLoading(true)
     if (currentId) {
-      updateElement(currentId, elementData);
+      await updateElement(currentId, elementData);
     } else {
-      createElement(elementData);
+      await createElement(elementData);
     }
     handleClear();
   };

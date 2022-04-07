@@ -14,10 +14,10 @@ import Row from "./Row/Row";
 import ShareModal from "./ShareModal/ShareModal";
 import ExportPrintModal from "./ExportPrintModal/ExportPrintModal";
 
-const MainList = ({ setCurrentId, elements }) => {
+const MainList = ({ setCurrentId, elements, isLoading, setIsLoading }) => {
   const [mode, setMode] = useState(false);
   const componentRef = useRef();
-  if (!elements) return "Start creating your setup by adding a new element";
+  if (!elements?.length && !isLoading) return "Start creating your setup by adding a new element";
 
   return (
     <Grid container>
@@ -42,6 +42,7 @@ const MainList = ({ setCurrentId, elements }) => {
                   row={row}
                   setCurrentId={setCurrentId}
                   mode={mode}
+                  setIsLoading={setIsLoading}
                 />
               ))}
             </TableBody>
