@@ -1,75 +1,14 @@
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Row from './Row/Row';
 import { getList } from '../../api';
 
 const MainList = () => {
-   const elements = [
-  {
-    "_id": "1",
-    "elementName": "Monitor",
-    "category": "accesories",
-    "elementModel": "Philips 196vla",
-    "description": "Lorem lorem lorem lorem lorem lorem",
-    "quantity": "2",
-    "price": "200",
-    "creator": "jacko"
-  },
-  {
-    "_id": "2",
-    "elementName": "CPU",
-    "category": "core",
-    "elementModel": "Intel i9-11800",
-    "description": "Lorem lorem lorem lorem lorem lorem",
-    "quantity": "1",
-    "price": "500",
-    "creator": "jacko"
-  },
-  {
-    "_id": "3",
-    "elementName": "GPU",
-    "category": "core",
-    "elementModel": "GeForce RTX 3060",
-    "description": "Lorem lorem lorem lorem lorem lorem",
-    "quantity": "1",
-    "price": "1000",
-    "creator": "jacko"
-  },
-  {
-    "_id": "4",
-    "elementName": "OS",
-    "category": "software",
-    "elementModel": "Windows 10",
-    "description": "Lorem lorem lorem lorem lorem lorem",
-    "quantity": "1",
-    "price": "20",
-    "creator": "jacko"
-  },
-  {
-    "_id": "5",
-    "elementName": "MousePad",
-    "category": "others",
-    "elementModel": "Razer XXL",
-    "description": "Lorem lorem lorem lorem lorem lorem",
-    "quantity": "1",
-    "price": "50",
-    "creator": "jacko"
-  },
-  {
-    "_id": "6",
-    "elementName": "Motherboard",
-    "category": "core",
-    "elementModel": "ASUS 480",
-    "description": "Lorem lorem lorem lorem lorem lorem",
-    "quantity": "1",
-    "price": "200",
-    "creator": "jacko"
-  }
-];
-const loadData = async ()=>{
+  const [elements, setElements] = useState();
+  const loadData = async ()=>{
   try {
-    const data = await getList();
-    console.log(data);
+    const {data} = await getList();
+    setElements(data.data)
   } catch (error) {
     console.log(error);
   }
