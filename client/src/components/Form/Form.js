@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Button,  Paper, Typography, Grid } from '@mui/material';
 import SelectElement from './SelectElement/SelectElement';
 import Input from './Input/Input';
+import { createElement } from '../../api';
 
 const initialState={elementName: "",
 category:"",
@@ -16,7 +17,9 @@ const Form = () => {
     setElementData({...elementData, [e.target.name]: e.target.value})
   }
   const handleClick = ()=>{
-    console.log(elementData)
+    console.log(elementData);
+    createElement(elementData);
+    handleClear();
   }
   const handleClear = ()=>{
     setElementData(initialState)

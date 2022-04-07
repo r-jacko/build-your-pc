@@ -13,13 +13,12 @@ export const getList = async (req,res)=>{
 export const createElement = async (req,res)=>{
   const element = req.body;
   const newElement = new Element({
-    ...element,
-    creator: req.userId
-  });
+    ...element
+  })
   try {
     await newElement.save();
-    res.status(201).json(newElement);
+    res.status(201).json(newElement)
   } catch (error) {
-    res.status(409).json({message:error.message});
+    res.status(409).json({message: error.message})
   }
 }
