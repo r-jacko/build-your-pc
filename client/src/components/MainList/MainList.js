@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import React, { useRef, useState } from "react";
 import Row from "./Row/Row";
+import SumUp from "./SumUp/SumUp";
 import ShareModal from "./ShareModal/ShareModal";
 import ExportPrintModal from "./ExportPrintModal/ExportPrintModal";
 
@@ -45,6 +46,7 @@ const MainList = ({ setCurrentId, elements, isLoading, setIsLoading }) => {
                   setIsLoading={setIsLoading}
                 />
               ))}
+              <SumUp elements={elements}/>
             </TableBody>
           </Table>
         </TableContainer>

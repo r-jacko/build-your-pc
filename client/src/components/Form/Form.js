@@ -83,7 +83,7 @@ const Form = ({ currentId, setCurrentId, elements, setIsLoading }) => {
         <Input
           value={elementData.price}
           name="price"
-          label="Price"
+          label="Price/item ($)"
           half
           type="number"
           handleChange={handleChange}

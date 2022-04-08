@@ -46,7 +46,7 @@ const Row = ({ row, setCurrentId, mode, setIsLoading }) => {
         <TableCell align="right">{row.elementModel}</TableCell>
         <TableCell align="right">{row.category}</TableCell>
         <TableCell align="right">{row.quantity}</TableCell>
-        <TableCell align="right">{row.price}</TableCell>
+        <TableCell align="right">{row.price} $</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
