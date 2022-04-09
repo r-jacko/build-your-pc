@@ -19,7 +19,6 @@ const Row = ({ row, setCurrentId, mode, setIsLoading }) => {
     setIsLoading(true)
     await deleteElement(row._id)
   }
-  console.log(mode);
   return (
     <>
       <TableRow sx={{ "& > *": { borderBottom: "unset" } }}>
@@ -44,12 +43,12 @@ const Row = ({ row, setCurrentId, mode, setIsLoading }) => {
           {row.elementName}
         </TableCell>
         <TableCell align="right">{row.elementModel}</TableCell>
-        <TableCell align="right">{row.category}</TableCell>
+        <TableCell align="right">{row.category.charAt(0).toUpperCase()+row.category.slice(1)}</TableCell>
         <TableCell align="right">{row.quantity}</TableCell>
         <TableCell align="right">{row.price} $</TableCell>
       </TableRow>
       <TableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={7}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <Typography variant="h6" gutterBottom component="div">
