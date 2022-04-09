@@ -10,6 +10,16 @@ export const getList = async (req,res)=>{
   }
 }
 
+export const getListByFilter = async (req,res)=>{
+  const {category} = req.query;
+  try {
+    const elements = await Element.find({category: category})
+    res.status(200).json({data:elements})
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+}
+
 export const createElement = async (req,res)=>{
   const element = req.body;
   const newElement = new Element({

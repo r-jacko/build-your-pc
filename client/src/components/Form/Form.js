@@ -52,12 +52,15 @@ const Form = ({ currentId, setCurrentId, elements, setIsLoading }) => {
           label="Name"
           handleChange={handleChange}
         />
+        <Grid item xs={12} md={6}>
         <SelectElement
           value={elementData.category}
           name="category"
           label="Category"
           handleChange={handleChange}
+          required
         />
+        </Grid>
         <Input
           value={elementData.elementModel}
           name="elementModel"

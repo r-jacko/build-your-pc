@@ -32,7 +32,7 @@ const Home = () => {
           <Bar />
         </Grid>
         <Grid item xs={12} md={6} lg={8}>
-          {isLoading? (<CircularProgress/>) : (<MainList setCurrentId={setCurrentId} elements={elements} isLoading={isLoading} setIsLoading={setIsLoading}/>)}
+          {isLoading? (<CircularProgress/>) : (<MainList setCurrentId={setCurrentId} elements={elements} isLoading={isLoading} setIsLoading={setIsLoading} setElements={setElements}/>)}
         </Grid>
         <Grid item xs={12} sm={8} md={6} lg={4}>
           <Form currentId={currentId} setCurrentId={setCurrentId} elements={elements} setIsLoading={setIsLoading}/>
