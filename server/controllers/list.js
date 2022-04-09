@@ -14,6 +14,7 @@ export const getListByFilter = async (req,res)=>{
   const {category} = req.query;
   try {
     const elements = await Element.find({category: category})
+    if(!elements.length) elements.push({_id:"0", elementName:"None", category:"", elementModel:"",description:"",quantity:"",price:""})
     res.status(200).json({data:elements})
   } catch (error) {
     res.status(404).json({message: error.message})

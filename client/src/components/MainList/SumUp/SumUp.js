@@ -34,6 +34,8 @@ const SumUp = ({elements}) => {
   
   return ( 
     <>
+    {elements.length===1 && elements[0].elementName==="None" ? null :(
+      <>
     <TableRow sx={{"& > *": {borderBottom: "unset"}}}>
       <TableCell>
         <IconButton aria-label="expand row" size="small" onClick={()=>setOpen((prevState)=>!prevState)}>
@@ -68,6 +70,8 @@ const SumUp = ({elements}) => {
         </Collapse>
         </TableCell>
     </TableRow>
+    </>
+    )}
     </>
    );
 }
