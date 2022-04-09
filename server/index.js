@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from 'dotenv'
 import listRoutes from './routes/list.js'
+import userRoutes from './routes/user.js'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 
@@ -10,7 +11,8 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(cors());
-app.use(listRoutes);
+app.use("/user",userRoutes);
+app.use("/",listRoutes);
 
 
 const CONNECTION_URL = process.env.CONNECTION_URL;

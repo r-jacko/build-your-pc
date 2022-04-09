@@ -3,8 +3,9 @@ import { Container, Grid } from "@mui/material";
 import Bar from "../Bar/Bar";
 import MainList from "../MainList/MainList";
 import Form from "../Form/Form";
-import { getList} from "../../api";
+import { getList, registerNewUser} from "../../api";
 import { CircularProgress } from "@mui/material";
+import {v4 as uuidv4} from 'uuid'
 
 const Home = () => {
   const [currentId, setCurrentId] = useState(null);
@@ -19,11 +20,18 @@ const Home = () => {
     }
     setIsLoading(false)
   };
+  const userAuth = async ()=>{
+    if(localStorage.getItem('profile')) return
+    localStorage.setItem('profile', JSON.stringify({userId: uuidv4(), updateKey: uuidv4()}))
+    console.log(localStorage.getItem('profile'))
+    registerNewUser(JSON.parse(localStorage.getItem('profile')))
+  }
   useEffect(() => {
     loadData();
   }, [isLoading]);
   useEffect(()=>{
     setIsLoading(true)
+    userAuth()
   },[])
   return (
     <Container maxWidth="xl">

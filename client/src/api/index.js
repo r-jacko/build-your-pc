@@ -6,3 +6,8 @@ export const getListByFilter = (category) => API.get(`/search?category=${categor
 export const createElement = (element) => API.post('/', element)
 export const updateElement = (id,updatedElement) => API.patch(`/${id}`, updatedElement)
 export const deleteElement = (id) => API.delete(`/${id}`);
+
+// user
+export const registerNewUser = (profile) => {
+  console.log(typeof(profile));
+  API.post('/user/register', profile)};
