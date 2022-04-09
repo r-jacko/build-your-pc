@@ -31,10 +31,10 @@ const Home = () => {
         <Grid item xs={12}>
           <Bar />
         </Grid>
-        <Grid item xs={12} sm={6} md={8}>
+        <Grid item xs={12} md={6} lg={8}>
           {isLoading? (<CircularProgress/>) : (<MainList setCurrentId={setCurrentId} elements={elements} isLoading={isLoading} setIsLoading={setIsLoading}/>)}
         </Grid>
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid item xs={12} sm={8} md={6} lg={4}>
           <Form currentId={currentId} setCurrentId={setCurrentId} elements={elements} setIsLoading={setIsLoading}/>
         </Grid>
       </Grid>
