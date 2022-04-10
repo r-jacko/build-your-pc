@@ -8,6 +8,7 @@ const SumUp = ({elements}) => {
   const [open, setOpen] = useState(false);
   const unique = new Set();
   const [testDataStructure, setTestDataStructure] = useState([]);
+  const [totalData, setTotalData] = useState({quantity:0, sum:0})
   const createUniqueValues = (elements)=>{
     elements?.forEach((el)=>{
       unique.add(el.category)
@@ -25,7 +26,8 @@ const SumUp = ({elements}) => {
       count += el.quantity;
       total += el.sum;
     })
-    // setTestDataStructure((prevState)=>[...prevState, {name:'Total', quantity:count, sum:total}])
+    setTotalData({quantity:count, sum: total})
+    
   }
   useEffect(()=>{
     setTestDataStructure([])
@@ -44,16 +46,14 @@ const SumUp = ({elements}) => {
       </TableCell>
       <TableCell/>
       <TableCell component="th" scope="row">
-        {/* {testDataStructure[testDataStructure.length-1]?.name} */}
         Total
       </TableCell>
       <TableCell/>
       <TableCell/>
       <TableCell align="right">{
-        // testDataStructure[testDataStructure.length-1]?.quantity
-        'HWDP'
-      }</TableCell>
-      <TableCell align="right">{'CENA'}</TableCell>
+        totalData.quantity
+        }</TableCell>
+      <TableCell align="right">{totalData.sum}</TableCell>
     </TableRow>
     <TableRow>
       <TableCell colSpan={7} >
