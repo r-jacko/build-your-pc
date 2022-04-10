@@ -53,7 +53,7 @@ const SumUp = ({elements}) => {
       <TableCell align="right">{
         totalData.quantity
         }</TableCell>
-      <TableCell align="right">{totalData.sum}</TableCell>
+      <TableCell align="right">{totalData.sum} $</TableCell>
     </TableRow>
     <TableRow>
       <TableCell colSpan={7} >
