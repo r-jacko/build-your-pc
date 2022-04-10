@@ -2,8 +2,19 @@ import mongoose from "mongoose";
 import Element from "../models/element.js";
 
 export const getList = async (req,res)=>{
+  const {userId} = JSON.parse(req.headers.authid)
   try {
-    const elements = await Element.find();
+    const elements = await Element.find({creator: userId});
+    res.status(200).json({data: elements})
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+}
+
+export const getUserList = async (req,res)=>{
+  const {id} = req.params;
+  try {
+    const elements = await Element.find({creator: id});
     res.status(200).json({data: elements})
   } catch (error) {
     res.status(404).json({message: error.message})

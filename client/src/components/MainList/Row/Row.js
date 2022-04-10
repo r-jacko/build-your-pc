@@ -13,7 +13,7 @@ import {
 import React, { useState } from "react";
 import { deleteElement } from "../../../api";
 
-const Row = ({ row, setCurrentId, mode, setIsLoading }) => {
+const Row = ({ row, setCurrentId, mode, setIsLoading, listId }) => {
   const [open, setOpen] = useState(false);
   const handleDelete = async ()=>{
     setIsLoading(true)
@@ -32,12 +32,15 @@ const Row = ({ row, setCurrentId, mode, setIsLoading }) => {
           </IconButton>
         </TableCell>
         <TableCell>
+          {!listId ? (<>
           <IconButton onClick={() => setCurrentId(row._id)} disabled={!mode}>
             <Edit />
           </IconButton>
           <IconButton onClick={handleDelete} disabled={!mode}>
             <Clear />
           </IconButton>
+          </>) : null}
+          
         </TableCell>
         <TableCell component="th" scope="row">
           {row.elementName}

@@ -14,7 +14,7 @@ const testStyle = {
   p: 4,
 };
 
-const ShareModal = ({ mode }) => {
+const ShareModal = ({ mode , user}) => {
   const [openModal, setOpenModal] = useState(false);
   const [copyStatus, setCopyStatus] = useState(false);
   const handleCloseModal = () => {
@@ -34,14 +34,11 @@ const ShareModal = ({ mode }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={testStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography id="modal-modal-title" variant="h6" component="h2" gutterBottom> 
             Share link
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Here is your link: LINK LINK LINK.
-          </Typography>
           <CopyToClipboard
-            text={"LINK LINK LINK"}
+            text={`http://localhost:3000/${user}`}
             onCopy={() => setCopyStatus(true)}
           >
             <Button variant={!copyStatus? 'outlined': 'contained'} color={!copyStatus? 'primary': 'success'}>

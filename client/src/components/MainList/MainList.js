@@ -21,6 +21,7 @@ import ShareModal from "./ShareModal/ShareModal";
 import ExportPrintModal from "./ExportPrintModal/ExportPrintModal";
 import SelectElement from "../Form/SelectElement/SelectElement";
 import { getListByFilter } from "../../api";
+import { useNavigate } from "react-router-dom";
 
 const MainList = ({
   setCurrentId,
@@ -28,10 +29,13 @@ const MainList = ({
   isLoading,
   setIsLoading,
   setElements,
+  user,
+  listId,
 }) => {
   const [mode, setMode] = useState(false);
   const [filterRule, setFilterRule] = useState("");
   const componentRef = useRef();
+  const navigate = useNavigate();
   const handleFilterBy = async (e) => {
     setFilterRule(e.target.value);
     if (e.target.value === "all") {
@@ -45,6 +49,10 @@ const MainList = ({
       }
     }
   };
+  const handleCreateOwnList = ()=>{
+    setIsLoading(true)
+    navigate("/")
+  }
   if (!elements?.length && !isLoading)
     return "Start creating your setup by adding a new element";
 
@@ -88,6 +96,7 @@ const MainList = ({
                   setCurrentId={setCurrentId}
                   mode={mode}
                   setIsLoading={setIsLoading}
+                  listId={listId}
                 />
               ))}
               <SumUp elements={elements} />
@@ -96,21 +105,23 @@ const MainList = ({
         </TableContainer>
       </Grid>
       <Grid item xs={12} md={4}>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            setCurrentId(null);
-            setMode((prevState) => !prevState);
-          }}
-        >
-          {mode ? `CANCEL` : `EDIT`}
-        </Button>
+        {!listId ? (
+          <Button
+            variant="outlined"
+            onClick={() => {
+              setCurrentId(null);
+              setMode((prevState) => !prevState);
+            }}
+          >
+            {mode ? `CANCEL` : `EDIT`}
+          </Button>
+        ) : (<Button variant="outlined" onClick={handleCreateOwnList}>CREATE YOUR OWN LIST</Button>)}
       </Grid>
       <Grid item xs={12} md={4}>
         <ExportPrintModal mode={mode} componentRef={componentRef} />
       </Grid>
       <Grid item xs={12} md={4}>
-        <ShareModal mode={mode} />
+        <ShareModal mode={mode} user={listId || user} />
       </Grid>
     </Grid>
   );

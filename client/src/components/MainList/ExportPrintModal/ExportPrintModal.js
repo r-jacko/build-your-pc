@@ -18,6 +18,7 @@ const ExportPrintModal = ({mode, componentRef}) => {
   const [openModal, setOpenModal] = useState(false)
   const handleCloseModal = ()=> setOpenModal(false)
   const handleOpenModal = ()=> setOpenModal(true)
+ 
   return ( 
     <>
     <Button variant="outlined" disabled={mode} onClick={handleOpenModal}>EXPORT/PRINT</Button>
@@ -30,7 +31,7 @@ const ExportPrintModal = ({mode, componentRef}) => {
       )}
       content={()=>componentRef.current}
       />
-      <Button>DOWNLOAD PDF</Button>
+      <Button variant='outlined'>DOWNLOAD PDF</Button>
       </Box>
     </Modal>
     </>

@@ -1,12 +1,14 @@
 import express from 'express';
-import {getList,getListByFilter, createElement ,deleteElement, updateElement} from "../controllers/list.js"
+import {getList,getListByFilter, getUserList, createElement ,deleteElement, updateElement} from "../controllers/list.js"
+import authUser from '../middleware/authUser.js'
 
 const router = express.Router();
 
+router.get("/:id", getUserList);
 router.get("/", getList);
 router.get("/search", getListByFilter)
-router.post("/", createElement);
-router.patch('/:id', updateElement);
-router.delete('/:id', deleteElement);
+router.post("/",authUser, createElement);
+router.patch('/:id',authUser, updateElement);
+router.delete('/:id',authUser, deleteElement);
 
 export default router;

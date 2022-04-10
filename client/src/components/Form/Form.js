@@ -13,7 +13,7 @@ const initialState = {
   price: "",
 };
 
-const Form = ({ currentId, setCurrentId, elements, setIsLoading }) => {
+const Form = ({ currentId, setCurrentId, elements, setIsLoading, user }) => {
   const [elementData, setElementData] = useState(initialState);
   const editedElement = currentId
     ? elements.find((element) => element._id === currentId)
@@ -26,7 +26,7 @@ const Form = ({ currentId, setCurrentId, elements, setIsLoading }) => {
     if (currentId) {
       await updateElement(currentId, elementData);
     } else {
-      await createElement(elementData);
+      await createElement({...elementData, creator: `${user}`});
     }
     handleClear();
   };
