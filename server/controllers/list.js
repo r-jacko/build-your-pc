@@ -61,5 +61,5 @@ export const deleteElement = async (req,res)=>{
   const {id} = req.params;
   if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("No element with that id");
   await Element.findByIdAndDelete(id);
-  res.status(200).json({Message: "Element deleted successfully"})
+  res.status(200).json({message: "Element deleted successfully"})
 }

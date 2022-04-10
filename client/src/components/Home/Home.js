@@ -16,26 +16,25 @@ const Home = () => {
   const [listId, setListId] = useState();
   const navigate = useNavigate();
   const loadData = async () => {
-    if(user){
-    setListId(window.location.pathname.slice(1));
-    console.log(listId, user)
-    console.log(listId === user);
-    if (listId === user) {
-      navigate("/");
-    } else if (listId) {
-      const { data } = await getUserList(listId);
-      setElements(data.data);
-    } else {
-      try {
-        const { data } = await getList();
+    if (user) {
+      setListId(window.location.pathname.slice(1));
+      console.log(listId, user);
+      console.log(listId === user);
+      if (listId === user) {
+        navigate("/");
+      } else if (listId) {
+        const { data } = await getUserList(listId);
         setElements(data.data);
-      } catch (error) {
-        console.log(error);
+      } else {
+        try {
+          const { data } = await getList();
+          setElements(data.data);
+        } catch (error) {
+          console.log(error);
+        }
       }
+      setIsLoading(false);
     }
-    setIsLoading(false);
-  }
-  
   };
   const userAuth = () => {
     if (!localStorage.getItem("profile")) {
@@ -60,7 +59,7 @@ const Home = () => {
         <Grid item xs={12}>
           <Bar />
         </Grid>
-        <Grid item xs={12} md={6} lg={8}>
+        <Grid item xs={12} md={listId? 12 : 6} lg={listId? 12 : 8}>
           {isLoading ? (
             <CircularProgress />
           ) : (
