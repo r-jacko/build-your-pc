@@ -2,7 +2,7 @@ import React from "react";
 import { TableHead, TableRow, TableCell, TableSortLabel } from "@mui/material";
 import SelectElement from "../../Form/SelectElement/SelectElement";
 
-const rowHeaders = ["name", "model", "category", "quantity", "price/item"];
+const rowHeaders = ["name", "model", "category", "quantity", "price"];
 
 const TableHeader = ({
   handleChange,
@@ -12,7 +12,27 @@ const TableHeader = ({
   orderDirection,
 }) => {
   const createSortHandler = (props)=> (e)=>{
-    handleSortRequest(e,props)
+    let sortValue;
+    switch (props) {
+      case "name":
+        sortValue="elementName"
+        break;
+      case "model":
+        sortValue="elementModel"
+        break;
+      case "category":
+        sortValue="category"
+        break;
+      case "quantity":
+        sortValue="quantity"
+        break;
+      case "price":
+        sortValue="price"
+        break;
+      default:
+        break;
+    }
+    handleSortRequest(e,sortValue)
   }
   return (
     <TableHead>

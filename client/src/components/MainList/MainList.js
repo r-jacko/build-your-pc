@@ -80,6 +80,7 @@ const MainList = ({
       if(order !==0) return order
       return a[1] - b[1]
     })
+    console.log(stabilizedRowArray);
     return stabilizedRowArray.map((el)=>el[0])
   }
   if (!elements?.length && !isLoading)
@@ -92,7 +93,7 @@ const MainList = ({
           <Table aria-label="collapsible table">
             <TableHeader handleChange={handleFilterBy} isFilter value={filterRule} handleSortRequest={handleSortRequest} valueToOrderBy={valueToOrderBy} orderDirection={orderDirection}/>
             <TableBody>
-              {elements.map((row) => (
+              {sortedElements(elements, getComparator(orderDirection, valueToOrderBy)).map((row) => (
                 <Row
                   key={row._id}
                   row={row}
