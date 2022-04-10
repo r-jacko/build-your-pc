@@ -71,7 +71,6 @@ const MainList = ({
       if(order !==0) return order
       return a[1] - b[1]
     })
-    console.log(stabilizedRowArray);
     return stabilizedRowArray.map((el)=>el[0])
   }
   if (!elements?.length && !isLoading)
@@ -82,7 +81,7 @@ const MainList = ({
       <Grid item xs={12}>
         <TableContainer component={Paper} ref={componentRef}>
           <Table aria-label="collapsible table">
-            <TableHeader handleChange={handleFilterBy} isFilter value={filterRule} handleSortRequest={handleSortRequest} valueToOrderBy={valueToOrderBy} orderDirection={orderDirection}/>
+            <TableHeader handleChange={handleFilterBy} isFilter value={filterRule} handleSortRequest={handleSortRequest} valueToOrderBy={valueToOrderBy} orderDirection={orderDirection} listId={listId}/>
             <TableBody>
               {sortedElements(elements, getComparator(orderDirection, valueToOrderBy)).map((row) => (
                 <Row

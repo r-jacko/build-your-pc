@@ -31,6 +31,7 @@ const SumUp = ({elements}) => {
   }
   useEffect(()=>{
     setTestDataStructure([])
+    setTotalData({quantity:0, sum:0})
     createUniqueValues(elements)
   },[elements])
   

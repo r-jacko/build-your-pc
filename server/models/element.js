@@ -5,8 +5,8 @@ const elementSchema = mongoose.Schema({
   category: String,
   elementModel: String,
   description: String,
-  quantity: String,
-  price: String,
+  quantity: Number,
+  price: Number,
   creator: String,
 })
 

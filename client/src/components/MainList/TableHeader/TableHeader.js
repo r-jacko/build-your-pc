@@ -10,47 +10,50 @@ const TableHeader = ({
   handleSortRequest,
   valueToOrderBy,
   orderDirection,
+  listId,
 }) => {
-  const createSortHandler = (props)=> (e)=>{
+  const createSortHandler = (props) => (e) => {
     let sortValue;
     switch (props) {
       case "name":
-        sortValue="elementName"
+        sortValue = "elementName";
         break;
       case "model":
-        sortValue="elementModel"
+        sortValue = "elementModel";
         break;
       case "category":
-        sortValue="category"
+        sortValue = "category";
         break;
       case "quantity":
-        sortValue="quantity"
+        sortValue = "quantity";
         break;
       case "price":
-        sortValue="price"
+        sortValue = "price";
         break;
       default:
         break;
     }
-    handleSortRequest(e,sortValue)
-  }
+    handleSortRequest(e, sortValue);
+  };
   return (
     <TableHead>
       <TableRow>
         <TableCell colSpan={2}>
-          <SelectElement
-            label="Filter by category"
-            handleChange={handleChange}
-            isFilter
-            value={value}
-          />
+          {listId ? null : (
+            <SelectElement
+              label="Filter by category"
+              handleChange={handleChange}
+              isFilter
+              value={value}
+            />
+          )}
         </TableCell>
         {rowHeaders.map((el, index) => (
           <TableCell key={el} align={index ? "right" : "left"}>
             <TableSortLabel
-            active={valueToOrderBy===el}
-            direction={valueToOrderBy === el ? orderDirection : 'asc'}
-            onClick={createSortHandler(el)}
+              active={valueToOrderBy === el}
+              direction={valueToOrderBy === el ? orderDirection : "asc"}
+              onClick={createSortHandler(el)}
             >
               {el.charAt(0).toUpperCase() + el.slice(1)}
             </TableSortLabel>

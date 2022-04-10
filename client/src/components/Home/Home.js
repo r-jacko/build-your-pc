@@ -18,8 +18,6 @@ const Home = () => {
   const loadData = async () => {
     if (user) {
       setListId(window.location.pathname.slice(1));
-      console.log(listId, user);
-      console.log(listId === user);
       if (listId === user) {
         navigate("/");
       } else if (listId) {
