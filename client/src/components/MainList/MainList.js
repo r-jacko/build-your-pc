@@ -22,6 +22,7 @@ import ExportPrintModal from "./ExportPrintModal/ExportPrintModal";
 import SelectElement from "../Form/SelectElement/SelectElement";
 import { getListByFilter } from "../../api";
 import { useNavigate } from "react-router-dom";
+import TableHeader from "./TableHeader/TableHeader";
 
 const MainList = ({
   setCurrentId,
@@ -34,6 +35,8 @@ const MainList = ({
 }) => {
   const [mode, setMode] = useState(false);
   const [filterRule, setFilterRule] = useState("");
+  const [orderDirection, setOrderDirection] = useState("asc");
+  const [valueToOrderBy, setValueToOrderBy] = useState("name")
   const componentRef = useRef();
   const navigate = useNavigate();
   const handleFilterBy = async (e) => {
@@ -49,9 +52,35 @@ const MainList = ({
       }
     }
   };
+  const handleSortRequest = (e, property)=>{
+    const isAscending = (valueToOrderBy === property && orderDirection === "asc")
+    setValueToOrderBy(property)
+    setOrderDirection(isAscending ? 'desc' : 'asc')
+  }
   const handleCreateOwnList = ()=>{
     setIsLoading(true)
     navigate("/")
+  }
+  const descendingComparator = (a,b,orderBy)=>{
+    if(b[orderBy]<a[orderBy]){
+      return -1
+    } else if (b[orderBy]> a[orderBy]){
+      return 1
+    } else {
+      return 0
+    }
+  }
+  const getComparator = (order, orderBy)=>{
+    return order === "desc" ? (a,b) => descendingComparator(a,b,orderBy) : (a,b)=> -descendingComparator(a,b,orderBy)
+  }
+  const sortedElements = (rowArray, comparator)=>{
+    const stabilizedRowArray = rowArray.map((el,index)=>[el,index])
+    stabilizedRowArray.sort((a,b)=>{
+      const order = comparator(a[0],b[0])
+      if(order !==0) return order
+      return a[1] - b[1]
+    })
+    return stabilizedRowArray.map((el)=>el[0])
   }
   if (!elements?.length && !isLoading)
     return "Start creating your setup by adding a new element";
@@ -61,33 +90,7 @@ const MainList = ({
       <Grid item xs={12}>
         <TableContainer component={Paper} ref={componentRef}>
           <Table aria-label="collapsible table">
-            <TableHead>
-              <TableRow>
-                <TableCell colSpan={2}>
-                  <SelectElement
-                    label="Filter by category"
-                    handleChange={handleFilterBy}
-                    isFilter
-                    value={filterRule}
-                  />
-                </TableCell>
-                <TableCell key="name">
-                  <TableSortLabel>Name</TableSortLabel>
-                </TableCell>
-                <TableCell key="model" align="right">
-                  <TableSortLabel>Model</TableSortLabel>
-                </TableCell>
-                <TableCell key="category" align="right">
-                  <TableSortLabel>Category</TableSortLabel>
-                </TableCell>
-                <TableCell key="quantity" align="right">
-                  <TableSortLabel>Quantity</TableSortLabel>
-                </TableCell>
-                <TableCell key="price" align="right">
-                  <TableSortLabel>Price/item</TableSortLabel>
-                </TableCell>
-              </TableRow>
-            </TableHead>
+            <TableHeader handleChange={handleFilterBy} isFilter value={filterRule} handleSortRequest={handleSortRequest} valueToOrderBy={valueToOrderBy} orderDirection={orderDirection}/>
             <TableBody>
               {elements.map((row) => (
                 <Row
