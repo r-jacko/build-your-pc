@@ -25,54 +25,52 @@ const MainList = ({
   listId,
 }) => {
   const [mode, setMode] = useState(false);
-  const [filterRule, setFilterRule] = useState("");
   const [orderDirection, setOrderDirection] = useState("asc");
-  const [valueToOrderBy, setValueToOrderBy] = useState("name")
+  const [valueToOrderBy, setValueToOrderBy] = useState("name");
+  let rule = "";
   const componentRef = useRef();
   const navigate = useNavigate();
   const handleFilterBy = async (e) => {
-    setFilterRule(e.target.value);
-    if (e.target.value === "all") {
-      setIsLoading(true);
-    } else {
-      try {
-        const { data } = await getListByFilter(e.target.value);
-        setElements(data.data);
-      } catch (error) {
-        console.log(error);
-      }
+    rule = e.target.value;
+    try {
+      const { data } = await getListByFilter(rule);
+      setElements(data.data);
+    } catch (error) {
+      console.log(error);
     }
   };
-  const handleSortRequest = (e, property)=>{
-    const isAscending = (valueToOrderBy === property && orderDirection === "asc")
-    setValueToOrderBy(property)
-    setOrderDirection(isAscending ? 'desc' : 'asc')
-  }
-  const handleCreateOwnList = ()=>{
-    setIsLoading(true)
-    navigate("/")
-  }
-  const descendingComparator = (a,b,orderBy)=>{
-    if(b[orderBy]<a[orderBy]){
-      return -1
-    } else if (b[orderBy]> a[orderBy]){
-      return 1
+  const handleSortRequest = (e, property) => {
+    const isAscending = valueToOrderBy === property && orderDirection === "asc";
+    setValueToOrderBy(property);
+    setOrderDirection(isAscending ? "desc" : "asc");
+  };
+  const handleCreateOwnList = () => {
+    setIsLoading(true);
+    navigate("/");
+  };
+  const descendingComparator = (a, b, orderBy) => {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    } else if (b[orderBy] > a[orderBy]) {
+      return 1;
     } else {
-      return 0
+      return 0;
     }
-  }
-  const getComparator = (order, orderBy)=>{
-    return order === "desc" ? (a,b) => descendingComparator(a,b,orderBy) : (a,b)=> -descendingComparator(a,b,orderBy)
-  }
-  const sortedElements = (rowArray, comparator)=>{
-    const stabilizedRowArray = rowArray.map((el,index)=>[el,index])
-    stabilizedRowArray.sort((a,b)=>{
-      const order = comparator(a[0],b[0])
-      if(order !==0) return order
-      return a[1] - b[1]
-    })
-    return stabilizedRowArray.map((el)=>el[0])
-  }
+  };
+  const getComparator = (order, orderBy) => {
+    return order === "desc"
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  };
+  const sortedElements = (rowArray, comparator) => {
+    const stabilizedRowArray = rowArray.map((el, index) => [el, index]);
+    stabilizedRowArray.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) return order;
+      return a[1] - b[1];
+    });
+    return stabilizedRowArray.map((el) => el[0]);
+  };
   if (!elements?.length && !isLoading)
     return "Start creating your setup by adding a new element";
 
@@ -81,13 +79,26 @@ const MainList = ({
       <Grid item xs={12}>
         <TableContainer component={Paper} ref={componentRef}>
           <Table aria-label="collapsible table">
-            <TableHeader handleChange={handleFilterBy} isFilter value={filterRule} handleSortRequest={handleSortRequest} valueToOrderBy={valueToOrderBy} orderDirection={orderDirection} listId={listId}/>
+            <TableHeader
+              handleFilterBy={handleFilterBy}
+              isFilter
+              value={rule}
+              handleSortRequest={handleSortRequest}
+              valueToOrderBy={valueToOrderBy}
+              orderDirection={orderDirection}
+              listId={listId}
+            />
             <TableBody>
-              {sortedElements(elements, getComparator(orderDirection, valueToOrderBy)).map((row) => (
+              {sortedElements(
+                elements,
+                getComparator(orderDirection, valueToOrderBy)
+              ).map((row) => (
                 <Row
                   key={row._id}
                   row={row}
                   setCurrentId={setCurrentId}
+                  elements={elements}
+                  setElements={setElements}
                   mode={mode}
                   setIsLoading={setIsLoading}
                   listId={listId}
@@ -109,7 +120,11 @@ const MainList = ({
           >
             {mode ? `CANCEL` : `EDIT`}
           </Button>
-        ) : (<Button variant="outlined" onClick={handleCreateOwnList}>CREATE YOUR OWN LIST</Button>)}
+        ) : (
+          <Button variant="outlined" onClick={handleCreateOwnList}>
+            CREATE YOUR OWN LIST
+          </Button>
+        )}
       </Grid>
       <Grid item xs={12} md={4}>
         <ExportPrintModal mode={mode} componentRef={componentRef} />

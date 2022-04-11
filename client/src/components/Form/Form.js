@@ -14,7 +14,7 @@ const initialState = {
   price: "",
 };
 
-const Form = ({ currentId, setCurrentId, elements, setIsLoading, user }) => {
+const Form = ({ currentId, setCurrentId, elements,setElements, setIsLoading, user }) => {
   const [elementData, setElementData] = useState(initialState);
   const [isAlert, setIsAlert] = useState(false)
   const [alertMessages, setAlertMessages] = useState([])
@@ -73,11 +73,12 @@ const Form = ({ currentId, setCurrentId, elements, setIsLoading, user }) => {
     if(validateAlert.length){
       return setIsAlert(true)
     }
-    setIsLoading(true)
     if (currentId) {
-      await updateElement(currentId, elementData);
+      const {data} = await updateElement(currentId, elementData);
+      setElements([...elements.filter((el)=>el._id !== currentId), data])
     } else {
-      await createElement({...elementData, creator: `${user}`});
+      const {data} = await createElement({...elementData, creator: `${user}`});
+      setElements([...elements, data])
     }
     handleClear();
   };

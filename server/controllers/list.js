@@ -23,8 +23,10 @@ export const getUserList = async (req,res)=>{
 
 export const getListByFilter = async (req,res)=>{
   const {category} = req.query;
+  const {userId} = JSON.parse(req.headers.authid)
+  const search = category!=="all"? {category, creator: userId} : {creator: userId}
   try {
-    const elements = await Element.find({category: category})
+    const elements = await Element.find(search)
     if(!elements.length) elements.push({_id:"0", elementName:"None", category:"", elementModel:"",description:"",quantity:"",price:""})
     res.status(200).json({data:elements})
   } catch (error) {

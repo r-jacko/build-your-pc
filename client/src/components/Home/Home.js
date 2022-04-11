@@ -78,6 +78,7 @@ const Home = () => {
               currentId={currentId}
               setCurrentId={setCurrentId}
               elements={elements}
+              setElements={setElements}
               setIsLoading={setIsLoading}
               user={user}
             />

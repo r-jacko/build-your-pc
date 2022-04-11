@@ -5,7 +5,7 @@ import SelectElement from "../../Form/SelectElement/SelectElement";
 const rowHeaders = ["name", "model", "category", "quantity", "price"];
 
 const TableHeader = ({
-  handleChange,
+  handleFilterBy,
   value,
   handleSortRequest,
   valueToOrderBy,
@@ -42,7 +42,7 @@ const TableHeader = ({
           {listId ? null : (
             <SelectElement
               label="Filter by category"
-              handleChange={handleChange}
+              handleChange={handleFilterBy}
               isFilter
               value={value}
             />

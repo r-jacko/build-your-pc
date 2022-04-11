@@ -1,5 +1,5 @@
 import React from "react";
-import { InputLabel, Select, MenuItem, Grid, FormControl} from "@mui/material";
+import { InputLabel, Select, MenuItem, FormControl} from "@mui/material";
 
 const SelectElement = ({
   name="filter", label, handleChange, value, required, isFilter

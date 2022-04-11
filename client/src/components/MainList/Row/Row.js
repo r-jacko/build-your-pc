@@ -13,11 +13,11 @@ import {
 import React, { useState } from "react";
 import { deleteElement } from "../../../api";
 
-const Row = ({ row, setCurrentId, mode, setIsLoading, listId }) => {
+const Row = ({ row, setCurrentId,elements,setElements, mode, setIsLoading, listId }) => {
   const [open, setOpen] = useState(false);
   const handleDelete = async ()=>{
-    setIsLoading(true)
     await deleteElement(row._id)
+    setElements(elements.filter((el)=>el._id !== row._id))
   }
   return (
     <>
