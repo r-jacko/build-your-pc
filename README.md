@@ -13,9 +13,11 @@
     <img src="images/logo.png" alt="Logo" width="100" height="100">
   </a>
 
-  <h3 align="center">BUILD-YOUR-PC</h3>
+  <h2 align="center">BUILD-YOUR-PC</h2>
 
-  <a href="https://build-your-pc.netlify.app/" align="center">LIVE</a>
+  <a href="https://build-your-pc.netlify.app/" align="center">
+  <h3>LIVE</h3>
+  </a><br>
   <em align="center">Apparently Heroku has problems with inactive servers. If the page is not loading, please try refreshing it a few times.</em>
 </div>
 
