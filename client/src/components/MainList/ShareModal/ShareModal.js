@@ -24,7 +24,12 @@ const ShareModal = ({ mode, user }) => {
   const handleOpenModal = () => setOpenModal(true);
   return (
     <>
-      <Button onClick={handleOpenModal} variant="outlined" disabled={mode} fullWidth>
+      <Button
+        onClick={handleOpenModal}
+        variant="outlined"
+        disabled={mode}
+        fullWidth
+      >
         SHARE
       </Button>
       <Modal
@@ -46,7 +51,7 @@ const ShareModal = ({ mode, user }) => {
             Click the button below to copy the link to the clipboard
           </Typography>
           <CopyToClipboard
-            text={`http://localhost:3000/${user}`}
+            text={`https://build-your-pc.netlify.app/${user}`}
             onCopy={() => setCopyStatus(true)}
           >
             <Button

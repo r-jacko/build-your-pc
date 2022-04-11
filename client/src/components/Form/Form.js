@@ -89,7 +89,6 @@ const Form = ({
   };
   const handleClick = async () => {
     validateForm();
-    console.log(elementData);
     if (validateAlert.length) {
       return setIsAlert(true);
     }
