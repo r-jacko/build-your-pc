@@ -22,7 +22,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-### [SEE PREBUILD LIST](https://build-your-pc.netlify.app/09686dfff4eb4e3381f95815737032c3)
+### [SEE PREBUILDED LIST](https://build-your-pc.netlify.app/09686dfff4eb4e3381f95815737032c3)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
