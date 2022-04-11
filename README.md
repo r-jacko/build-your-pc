@@ -3,22 +3,16 @@
 [![MIT License][license-shield]](https://github.com/r-jacko/build-your-pc/blob/main/LICENSE.txt)
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-
-
-
-<!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/r-jacko/build-your-pc">
     <img src="images/logo.png" alt="Logo" width="100" height="100">
   </a>
 
-  <h2 align="center">BUILD-YOUR-PC</h2>
+  <h2>BUILD-YOUR-PC</h2>
 
-  <a href="https://build-your-pc.netlify.app/" align="center">
-  <h3>LIVE</h3>
-  </a><br>
-  <em align="center">Apparently Heroku has problems with inactive servers. If the page is not loading, please try refreshing it a few times.</em>
+  ## [LIVE](https://build-your-pc.netlify.app/)
+  <em>Apparently Heroku has problems with inactive servers. If the page is not loading, please try refreshing it a few times.</em>
 </div>
 
 ## About The Project
@@ -28,8 +22,6 @@
 ### [SEE PREBUILDED LIST](https://build-your-pc.netlify.app/09686dfff4eb4e3381f95815737032c3)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Built With
 
@@ -89,9 +81,6 @@ To get a local copy up and running follow these simple steps.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-<!-- ROADMAP -->
 ## Incoming
 
 - [ ] Auto clearing inactive lists
@@ -102,7 +91,6 @@ To get a local copy up and running follow these simple steps.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
@@ -111,7 +99,6 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 
-<!-- CONTACT -->
 ## Contact
 
 [![LinkedIn][linkedin-shield]][linkedin-url]
