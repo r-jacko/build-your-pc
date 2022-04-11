@@ -12,6 +12,7 @@ const Home = () => {
   const [currentId, setCurrentId] = useState(null);
   const [elements, setElements] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [filterRule, setFilterRule] = useState("")
   const [user, setUser] = useState();
   const [listId, setListId] = useState();
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ const Home = () => {
     if (!localStorage.getItem("profile")) {
       localStorage.setItem(
         "profile",
-        JSON.stringify({ userId: uuidv4(), updateKey: uuidv4() })
+        JSON.stringify({ userId: uuidv4().replaceAll("-",""), updateKey: uuidv4().replaceAll("-","") })
       );
       registerNewUser(JSON.parse(localStorage.getItem("profile")));
     }
@@ -69,6 +70,8 @@ const Home = () => {
               setElements={setElements}
               user={user}
               listId={listId}
+              filterRule={filterRule}
+              setFilterRule={setFilterRule}
             />
           )}
         </Grid>
@@ -81,6 +84,7 @@ const Home = () => {
               setElements={setElements}
               setIsLoading={setIsLoading}
               user={user}
+              filterRule={filterRule}
             />
           ) : null}
         </Grid>

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Paper, Typography, Grid } from "@mui/material";
 import SelectElement from "./SelectElement/SelectElement";
 import Input from "./Input/Input";
-import { createElement ,updateElement } from "../../api";
-import AlertModal from "./AlertModal/AlertModal"
+import { createElement, updateElement } from "../../api";
+import AlertModal from "./AlertModal/AlertModal";
 
 const initialState = {
   elementName: "",
@@ -14,71 +14,97 @@ const initialState = {
   price: "",
 };
 
-const Form = ({ currentId, setCurrentId, elements,setElements, setIsLoading, user }) => {
+const Form = ({
+  currentId,
+  setCurrentId,
+  elements,
+  setElements,
+  setIsLoading,
+  user,
+  filterRule,
+}) => {
   const [elementData, setElementData] = useState(initialState);
-  const [isAlert, setIsAlert] = useState(false)
-  const [alertMessages, setAlertMessages] = useState([])
-  const validateAlert = []
+  const [isAlert, setIsAlert] = useState(false);
+  const [alertMessages, setAlertMessages] = useState([]);
+  const validateAlert = [];
   const editedElement = currentId
     ? elements.find((element) => element._id === currentId)
     : null;
   const handleChange = (e) => {
     setElementData({ ...elementData, [e.target.name]: e.target.value });
   };
-  const validateForm = ()=>{
-    validateAlert.length=0
-    if(elementData.elementName.trim().length > 30) {
-      validateAlert.push("Name is to long, maximum length is 30 characters.")
-    } else if (elementData.elementName.trim().length===0){
-      validateAlert.push("Name doesn't exist.")
+  let validatedData = {
+    elementName: "",
+    category: elementData.category,
+    elementModel: "",
+    description: "",
+    quantity: "",
+    price: "",
+  };
+  const validateForm = () => {
+    validateAlert.length = 0;
+    if (elementData.elementName.trim().length > 30) {
+      validateAlert.push("Name is to long, maximum length is 30 characters.");
+    } else if (elementData.elementName.trim().length === 0) {
+      validateAlert.push("Name doesn't exist.");
     } else {
-      let validatedName = elementData.elementName.trim()
-      setElementData({...elementData, elementName: validatedName})
+      validatedData.elementName = elementData.elementName.trim();
+      validatedData.elementName =
+        validatedData.elementName.charAt(0).toUpperCase() +
+        validatedData.elementName.slice(1);
     }
-    if(!elementData.category.length) {
-      validateAlert.push("Choose a category")
+    if (!elementData.category.length) {
+      validateAlert.push("Choose a category");
     }
-    if(elementData.elementModel.trim().length > 30) {
-      validateAlert.push("Model is to long, maximum length is 30 characters.")
-    } else if (elementData.elementModel.trim().length===0){
-      validateAlert.push("Model doesn't exist.")
+    if (elementData.elementModel.trim().length > 30) {
+      validateAlert.push("Model is to long, maximum length is 30 characters.");
+    } else if (elementData.elementModel.trim().length === 0) {
+      validateAlert.push("Model doesn't exist.");
     } else {
-      let validatedModel = elementData.elementModel.trim()
-      setElementData({...elementData, elementModel: validatedModel})
+      validatedData.elementModel = elementData.elementModel.trim();
+      validatedData.elementModel =
+        validatedData.elementModel.charAt(0).toUpperCase() +
+        validatedData.elementModel.slice(1);
     }
-    if(elementData.description.trim().length > 500) {
-      validateAlert.push("Description is to long, maximum length is 500 characters.")
-    } else if (elementData.description.trim().length===0){
-      validateAlert.push("Description doesn't exist.")
+    if (elementData.description.trim().length > 500) {
+      validateAlert.push(
+        "Description is to long, maximum length is 500 characters."
+      );
+    } else if (elementData.description.trim().length === 0) {
+      validateAlert.push("Description doesn't exist.");
     } else {
-      let validatedDescription = elementData.description.trim()
-      setElementData({...elementData, description: validatedDescription})
+      validatedData.description = elementData.description.trim();
     }
-    if(/^[+]?\d+([.]\d+)?$/.test(parseInt(elementData.quantity))){
-      let validatedQuantity = parseInt(elementData.quantity)
-      setElementData({...elementData, quantity: validatedQuantity})
+    if (/^[+]?\d+([.]\d+)?$/.test(parseInt(elementData.quantity))) {
+      validatedData.quantity = parseInt(elementData.quantity);
     } else {
-      validateAlert.push("Quantity is not a valid number")
+      validateAlert.push("Quantity is not a valid number");
     }
-    if(/^[+]?\d+([.]\d+)?$/.test(parseInt(elementData.price))){
-      let validatedPrice = parseInt(elementData.price)
-      setElementData({...elementData, price: validatedPrice})
+    if (/^[+]?\d+([.]\d+)?$/.test(parseInt(elementData.price))) {
+      validatedData.price = parseInt(elementData.price);
     } else {
-      validateAlert.push("Price is not a valid number")
+      validateAlert.push("Price is not a valid number");
     }
-    setAlertMessages([...validateAlert])
-  }
+    console.log(validatedData);
+    setAlertMessages([...validateAlert]);
+  };
   const handleClick = async () => {
     validateForm();
-    if(validateAlert.length){
-      return setIsAlert(true)
+    console.log(elementData);
+    if (validateAlert.length) {
+      return setIsAlert(true);
     }
     if (currentId) {
-      const {data} = await updateElement(currentId, elementData);
-      setElements([...elements.filter((el)=>el._id !== currentId), data])
+      const { data } = await updateElement(currentId, validatedData);
+      setElements([...elements.filter((el) => el._id !== currentId), data]);
     } else {
-      const {data} = await createElement({...elementData, creator: `${user}`});
-      setElements([...elements, data])
+      const { data } = await createElement({
+        ...validatedData,
+        creator: `${user}`,
+      });
+      if (!filterRule || filterRule === data.category) {
+        setElements([...elements, data]);
+      }
     }
     handleClear();
   };
@@ -89,12 +115,16 @@ const Form = ({ currentId, setCurrentId, elements,setElements, setIsLoading, use
   useEffect(() => {
     if (editedElement) setElementData(editedElement);
   }, [editedElement]);
-  useEffect(()=>{
-    if (!currentId) handleClear()
-  },[currentId])
+  useEffect(() => {
+    if (!currentId) handleClear();
+  }, [currentId]);
   return (
     <Paper elevation={6}>
-      <AlertModal isAlert={isAlert} setIsAlert={setIsAlert} alertMessages={alertMessages}/>
+      <AlertModal
+        isAlert={isAlert}
+        setIsAlert={setIsAlert}
+        alertMessages={alertMessages}
+      />
       <Typography variant="h5" textAlign="center">
         {currentId ? `Editing` : `Adding`} an element
       </Typography>
@@ -106,13 +136,13 @@ const Form = ({ currentId, setCurrentId, elements,setElements, setIsLoading, use
           handleChange={handleChange}
         />
         <Grid item xs={12} md={6}>
-        <SelectElement
-          value={elementData.category}
-          name="category"
-          label="Category"
-          handleChange={handleChange}
-          required
-        />
+          <SelectElement
+            value={elementData.category}
+            name="category"
+            label="Category"
+            handleChange={handleChange}
+            required
+          />
         </Grid>
         <Input
           value={elementData.elementModel}
@@ -146,7 +176,7 @@ const Form = ({ currentId, setCurrentId, elements,setElements, setIsLoading, use
         />
         <Grid item xs={6}>
           <Button variant="contained" color="primary" onClick={handleClick}>
-            {currentId? `CHANGE`:`ADD`}
+            {currentId ? `CHANGE` : `ADD`}
           </Button>
         </Grid>
         <Grid item xs={6}>

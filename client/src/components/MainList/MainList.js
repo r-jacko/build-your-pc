@@ -23,6 +23,8 @@ const MainList = ({
   setElements,
   user,
   listId,
+  filterRule,
+  setFilterRule,
 }) => {
   const [mode, setMode] = useState(false);
   const [orderDirection, setOrderDirection] = useState("asc");
@@ -31,6 +33,7 @@ const MainList = ({
   const componentRef = useRef();
   const navigate = useNavigate();
   const handleFilterBy = async (e) => {
+    setFilterRule(e.target.value)
     rule = e.target.value;
     try {
       const { data } = await getListByFilter(rule);
@@ -82,7 +85,7 @@ const MainList = ({
             <TableHeader
               handleFilterBy={handleFilterBy}
               isFilter
-              value={rule}
+              value={filterRule}
               handleSortRequest={handleSortRequest}
               valueToOrderBy={valueToOrderBy}
               orderDirection={orderDirection}

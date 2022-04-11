@@ -1,6 +1,6 @@
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUp from "@mui/icons-material/KeyboardArrowUp";
-import {Box, Collapse, IconButton, Table, TableBody, TableCell, TableRow, Typography} from '@mui/material'
+import {Collapse, IconButton, TableCell, TableRow} from '@mui/material'
 import React, {useEffect, useState} from 'react';
 
 
@@ -10,6 +10,8 @@ const SumUp = ({elements}) => {
   const [testDataStructure, setTestDataStructure] = useState([]);
   const [totalData, setTotalData] = useState({quantity:0, sum:0})
   const createUniqueValues = (elements)=>{
+    console.log('elementy',elements);
+    if(elements.length>0 && elements[0]?.elementName !== "None"){
     elements?.forEach((el)=>{
       unique.add(el.category)
     })
@@ -22,11 +24,13 @@ const SumUp = ({elements}) => {
       setTestDataStructure((prevState)=>[...prevState, {name:u, quantity: count, sum:total}])
     })
     let count = 0, total = 0;
+    console.log('struktura',testDataStructure)
     testDataStructure.forEach((el)=>{
       count += el.quantity;
       total += el.sum;
     })
     setTotalData({quantity:count, sum: total})
+  }
     
   }
   useEffect(()=>{
