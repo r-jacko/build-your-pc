@@ -21,7 +21,7 @@ const ExportPrintModal = ({mode, componentRef}) => {
  
   return ( 
     <>
-    <Button variant="outlined" disabled={mode} onClick={handleOpenModal}>EXPORT/PRINT</Button>
+    <Button variant="outlined" disabled={mode} onClick={handleOpenModal} fullWidth>EXPORT/PRINT</Button>
     <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-modal-title">
       <Box sx={testStyle}>
       <Typography id="modal-modal-title" variant='h6' component="h2">Choose an option</Typography>

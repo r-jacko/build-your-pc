@@ -78,7 +78,7 @@ const MainList = ({
     return "Start creating your setup by adding a new element";
 
   return (
-    <Grid container>
+    <Grid container spacing={3}>
       <Grid item xs={12}>
         <TableContainer component={Paper} ref={componentRef}>
           <Table aria-label="collapsible table">
@@ -112,10 +112,11 @@ const MainList = ({
           </Table>
         </TableContainer>
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={12} md={4} lg={3} xxl={2}>
         {!listId ? (
           <Button
             variant="outlined"
+            fullWidth
             onClick={() => {
               setCurrentId(null);
               setMode((prevState) => !prevState);
@@ -129,10 +130,10 @@ const MainList = ({
           </Button>
         )}
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={6} md={4} lg={3} xxl={2}>
         <ExportPrintModal mode={mode} componentRef={componentRef} />
       </Grid>
-      <Grid item xs={12} md={4}>
+      <Grid item xs={6} md={4} lg={3} xxl={2}>
         <ShareModal mode={mode} user={listId || user} />
       </Grid>
     </Grid>

@@ -26,7 +26,7 @@ const ShareModal = ({isAlert, setIsAlert, alertMessages}) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={testStyle}>
-          <Typography id="modal-modal-title" variant="h4" component="h2" gutterBottom> 
+          <Typography id="modal-modal-title" variant="h4" component="h2" gutterBottom color="error"> 
             Form validation error
           </Typography>
           {alertMessages.map((alertMessage, index)=>(

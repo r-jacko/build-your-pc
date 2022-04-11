@@ -14,7 +14,7 @@ const testStyle = {
   p: 4,
 };
 
-const ShareModal = ({ mode , user}) => {
+const ShareModal = ({ mode, user }) => {
   const [openModal, setOpenModal] = useState(false);
   const [copyStatus, setCopyStatus] = useState(false);
   const handleCloseModal = () => {
@@ -24,7 +24,7 @@ const ShareModal = ({ mode , user}) => {
   const handleOpenModal = () => setOpenModal(true);
   return (
     <>
-      <Button onClick={handleOpenModal} variant="outlined" disabled={mode}>
+      <Button onClick={handleOpenModal} variant="outlined" disabled={mode} fullWidth>
         SHARE
       </Button>
       <Modal
@@ -34,16 +34,27 @@ const ShareModal = ({ mode , user}) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={testStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2" gutterBottom> 
+          <Typography
+            id="modal-modal-title"
+            variant="h4"
+            component="h2"
+            gutterBottom
+          >
             Share link
+          </Typography>
+          <Typography id="modal-modal-description" variant="h6" gutterBottom>
+            Click the button below to copy the link to the clipboard
           </Typography>
           <CopyToClipboard
             text={`http://localhost:3000/${user}`}
             onCopy={() => setCopyStatus(true)}
           >
-            <Button variant={!copyStatus? 'outlined': 'contained'} color={!copyStatus? 'primary': 'success'}>
-              {!copyStatus? 'COPY' : 'COPIED'}
-              </Button>
+            <Button
+              variant={!copyStatus ? "outlined" : "contained"}
+              color={!copyStatus ? "primary" : "success"}
+            >
+              {!copyStatus ? "COPY" : "COPIED"}
+            </Button>
           </CopyToClipboard>
         </Box>
       </Modal>

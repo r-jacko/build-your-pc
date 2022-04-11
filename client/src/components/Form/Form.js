@@ -54,7 +54,7 @@ const Form = ({
         validatedData.elementName.slice(1);
     }
     if (!elementData.category.length) {
-      validateAlert.push("Choose a category");
+      validateAlert.push("Choose a category.");
     }
     if (elementData.elementModel.trim().length > 30) {
       validateAlert.push("Model is to long, maximum length is 30 characters.");
@@ -78,14 +78,13 @@ const Form = ({
     if (/^[+]?\d+([.]\d+)?$/.test(parseInt(elementData.quantity))) {
       validatedData.quantity = parseInt(elementData.quantity);
     } else {
-      validateAlert.push("Quantity is not a valid number");
+      validateAlert.push("Quantity is not a valid number.");
     }
     if (/^[+]?\d+([.]\d+)?$/.test(parseInt(elementData.price))) {
       validatedData.price = parseInt(elementData.price);
     } else {
-      validateAlert.push("Price is not a valid number");
+      validateAlert.push("Price is not a valid number.");
     }
-    console.log(validatedData);
     setAlertMessages([...validateAlert]);
   };
   const handleClick = async () => {
@@ -119,13 +118,13 @@ const Form = ({
     if (!currentId) handleClear();
   }, [currentId]);
   return (
-    <Paper elevation={6}>
+    <Paper elevation={6} sx={{padding: 2}}>
       <AlertModal
         isAlert={isAlert}
         setIsAlert={setIsAlert}
         alertMessages={alertMessages}
       />
-      <Typography variant="h5" textAlign="center">
+      <Typography variant="h5" textAlign="center" gutterBottom>
         {currentId ? `Editing` : `Adding`} an element
       </Typography>
       <Grid container spacing={2}>
@@ -175,12 +174,12 @@ const Form = ({
           handleChange={handleChange}
         />
         <Grid item xs={6}>
-          <Button variant="contained" color="primary" onClick={handleClick}>
+          <Button variant="contained" color="primary" onClick={handleClick} fullWidth>
             {currentId ? `CHANGE` : `ADD`}
           </Button>
         </Grid>
         <Grid item xs={6}>
-          <Button variant="outlined" color="secondary" onClick={handleClear}>
+          <Button variant="outlined" color="secondary" onClick={handleClear} fullWidth>
             Clear
           </Button>
         </Grid>
