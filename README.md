@@ -20,7 +20,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://build-your-pc.netlify.app/)
 
 ### [SEE PREBUILDED LIST](https://build-your-pc.netlify.app/09686dfff4eb4e3381f95815737032c3)
 
@@ -94,6 +94,7 @@ To get a local copy up and running follow these simple steps.
 - [ ] Auto clearing inactive lists
 - [ ] Floating form button on mobile devices
 - [ ] Export to PDF
+- [ ] Code cleanup
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
