@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Box, Button, Modal, Typography } from "@mui/material";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import React from "react";
+import { Box, Modal, Typography } from "@mui/material";
 
 const testStyle = {
   position: "absolute",

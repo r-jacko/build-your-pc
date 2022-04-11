@@ -19,7 +19,6 @@ const Form = ({
   setCurrentId,
   elements,
   setElements,
-  setIsLoading,
   user,
   filterRule,
 }) => {

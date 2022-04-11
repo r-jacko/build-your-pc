@@ -82,7 +82,6 @@ const Home = () => {
               setCurrentId={setCurrentId}
               elements={elements}
               setElements={setElements}
-              setIsLoading={setIsLoading}
               user={user}
               filterRule={filterRule}
             />

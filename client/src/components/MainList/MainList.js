@@ -103,7 +103,6 @@ const MainList = ({
                   elements={elements}
                   setElements={setElements}
                   mode={mode}
-                  setIsLoading={setIsLoading}
                   listId={listId}
                 />
               ))}
